@@ -7,7 +7,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/11bbbf9259251bdcada3/maintainability)](https://codeclimate.com/github/KrusnikViers/TgBotTemplate/maintainability)
 
 This project is intended to be used as a base for other Telegram bots. Current template has next features/requirements:
-* Requires Python 3.8.2 or newer
+* Requires Python 3.6 or newer
 * Requires Python packages from `requirements.txt`
 * Contains lightweight database, that could be used to store your bot information
 * Has localization support using Babel library.

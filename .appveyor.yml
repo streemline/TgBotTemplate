@@ -1,7 +1,6 @@
 build: false
 
 environment:
-  global:
   matrix:
     - PYTHON: "C:\\Python36"
       PYTHON_VERSION: "3.6.x"

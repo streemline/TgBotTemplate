@@ -15,13 +15,6 @@ This project is intended to be used as a base for other Telegram bots. Current t
 
 _If any changes made to this file, check all places with RELEASE-UPDATE comment in code to be updated accordingly_
 
-# TODO list
-* Update everything in database directory
-* Update everything in handlers directory
-* Update everything in l18n directory
-* Use SQLite instead of PostgreSQL
-* Recreate continuous integration
-
 ## Before the start
 Every Telegram bot needs token from the @BotFather. When registering a token, keep in mind:
 * For participating in groups, Group mode should be enabled;

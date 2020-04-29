@@ -5,6 +5,7 @@ from telegram.ext import CallbackQueryHandler, CommandHandler, MessageHandler, U
 from telegram.ext.filters import Filters
 
 from app.database.connection import DatabaseConnection
+from app.handlers.actions import Callback
 from app.handlers.context import Context
 from app.handlers.filters import Filter
 from app.handlers.impl import basic, routing
@@ -43,6 +44,7 @@ class Dispatcher:
                          has_params: bool = False) -> CallbackQueryHandler:
         def make_callback_pattern(callback_command: int, has_parameters: bool) -> str:
             return '^{0}{1}$'.format(str(callback_command), '\ .+' if has_parameters else '')
+
         return CallbackQueryHandler(self._make_handler(raw_callable, input_filters + [Filter.CALLBACK]),
                                     pattern=make_callback_pattern(command, has_params))
 
@@ -52,6 +54,7 @@ class Dispatcher:
             self.command_handler(['start', 'help'], basic.on_help_or_start),
             self.command_handler(['cancel'], basic.on_reset_action),
             self.command_handler(['report'], basic.on_user_report_request),
+            self.callback_handler(Callback.CANCEL, basic.on_reset_action),
 
             # Special empty handler to let bot update user statuses even from non-message events.
             MessageHandler(Filters.all, self._make_handler(routing.dispatch_bare_message, [Filter.INCOMPLETE_DATA])),

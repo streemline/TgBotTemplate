@@ -1,6 +1,6 @@
 #: handlers/impl/basic.py:15
 msgid "pending_action_cancelled"
-msgstr "Нет так нет."
+msgstr "Действие отменено."
 
 #: handlers/impl/basic.py:20
 msgid "waiting_for_{user}_report"

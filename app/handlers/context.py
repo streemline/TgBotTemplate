@@ -1,4 +1,5 @@
-from telegram import Bot, Message, Update
+from telegram import Chat, Message, Update
+from telegram.ext import CallbackContext
 
 from app.database.connection import DatabaseConnection
 from app.database.scoped_session import ScopedSession
@@ -8,10 +9,11 @@ from app.models.all import User
 
 
 class Context(ScopedSession):
-    def __init__(self, update: Update, bot: Bot, db: DatabaseConnection, translations: Translations):
+    def __init__(self, update: Update, callback_context: CallbackContext, db: DatabaseConnection,
+                 translations: Translations):
         super(Context, self).__init__(db)
         self.update = update
-        self.bot = bot
+        self.callback_context = callback_context
         self.sender = self._maybe_get_user_from_update()
         self._translation = self._get_translation(translations)
 

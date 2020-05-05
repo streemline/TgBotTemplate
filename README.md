@@ -22,12 +22,14 @@ Every Telegram bot needs token from the @BotFather. When registering a token, ke
 Options could be passed via configuration json file or command line (`-param_name=value`), configuration example is
 in the `configuration.json.example` file. By default, bot will be looking for `configuration.json` file in the root
 directory (same level with this README file). Telegram API token is the only required parameter to have bot started.
+Parameter dp_path should be skipped, if bot is running as a Docker container.
 
 ## How to run via Docker
 ```
-docker run --restart always --name <instance name> -d <docker image name> \
+docker run --restart always --name <instance name> -d \
  -v <path to configuration>:/instance/configuration.json \
- -v <path to the db directory>:/instance/storage
+ -v <path to the db directory>:/instance/storage \
+ <docker image name>
 ```
 
 ## How to run as a developer

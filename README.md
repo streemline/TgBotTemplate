@@ -1,4 +1,4 @@
-# Telegram Bot Template 1.0.0
+# Telegram Bot Template 1.0.1
 
 [![Build Status](https://travis-ci.org/KrusnikViers/TgBotTemplate.svg)](https://travis-ci.org/KrusnikViers/TgBotTemplate)
 [![Build status](https://ci.appveyor.com/api/projects/status/6uaw3t0aevq62ydp?svg=true)](https://ci.appveyor.com/project/KrusnikViers/tgbottemplate)

@@ -1,5 +1,5 @@
 {
   "telegram_bot_token": "bot_token_from_botfather",
   "superuser": "login_without_@",
-  "db_path": "path_to_db_file"
+  "storage_directory": "path_to_store_things"
 }

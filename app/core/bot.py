@@ -4,6 +4,7 @@ from flexiconf import ArgsLoader, Configuration, JsonLoader
 from telegram.ext import Updater
 
 from app.core.info import APP_DIR, ROOT_DIR
+from app.core.utils import global_logging_init
 from app.database.connection import DatabaseConnection
 from app.handlers.dispatcher import Dispatcher
 from app.handlers.util.reports import ReportsSender
@@ -25,7 +26,7 @@ class Bot:
         self.updater.idle()
 
     def _set_up(self):
-        logging.basicConfig(format='%(asctime)s:%(name)s:%(levelname)s - %(message)s', level=logging.INFO)
+        global_logging_init()
 
         self.configuration = Configuration([
             JsonLoader(str(ROOT_DIR / 'configuration.json')),

@@ -53,7 +53,10 @@ class Filter:
     def apply(filters: list, update: Update):
         if not Filter._basic_filters(update) or not Filter._completeness_filters(filters, update):
             return False
-        for filter_value in filters:
-            if not (filter_value in Filter._NO_CHECKS or Filter._CHECKS[filter_value](update)):
-                return False
-        return True
+        return all(
+            (
+                filter_value in Filter._NO_CHECKS
+                or Filter._CHECKS[filter_value](update)
+            )
+            for filter_value in filters
+        )

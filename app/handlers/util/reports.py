@@ -26,14 +26,12 @@ class ReportsSender:
     @classmethod
     def report_exception(cls, connection: DatabaseConnection):
         with ScopedSession(connection) as session:
-            superuser = cls._find_superuser(session)
-            if superuser:
+            if superuser := cls._find_superuser(session):
                 cls.instance.bot.send_message(superuser.id, traceback.format_exc())
 
     @classmethod
     def forward_user_message(cls, context: Context):
-        superuser = cls._find_superuser(context.session)
-        if superuser:
+        if superuser := cls._find_superuser(context.session):
             cls.instance.bot.forward_message(superuser.id,
                                              context.update.effective_chat.id,
                                              context.update.message.message_id)

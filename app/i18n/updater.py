@@ -13,10 +13,10 @@ class TranslationsUpdater:
         self.sources_dir = sources_dir
 
     def is_translations_generated(self) -> bool:
-        for lang in SUPPORTED_LANGUAGES:
-            if not self.locale_dir.joinpath(lang, 'LC_MESSAGES', 'zordon.mo').is_file():
-                return False
-        return True
+        return all(
+            self.locale_dir.joinpath(lang, 'LC_MESSAGES', 'zordon.mo').is_file()
+            for lang in SUPPORTED_LANGUAGES
+        )
 
     def regenerate_all(self) -> bool:
         new_catalog = self._build_strings_catalog_from_sources()
@@ -81,8 +81,9 @@ class TranslationsUpdater:
     def _is_translations_complete(strings_catalog: catalog.Catalog, language: str) -> bool:
         is_translations_valid = True
         for msg in strings_catalog:
-            error_string = TranslationsUpdater._check_message_and_get_error(msg, language)
-            if error_string:
+            if error_string := TranslationsUpdater._check_message_and_get_error(
+                msg, language
+            ):
                 logging.error(error_string)
                 is_translations_valid = False
         return is_translations_valid

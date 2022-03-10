@@ -20,7 +20,7 @@ class Bot:
 
     def run(self):
         self._set_up()
-        logging.info('Launching bot: ' + str(self.updater.bot.get_me()))
+        logging.info(f'Launching bot: {str(self.updater.bot.get_me())}')
         self.updater.start_polling()
         # This call will lock execution until worker threads are stopped with SIGINT(2), SIGTERM(15) or SIGABRT(6).
         self.updater.idle()

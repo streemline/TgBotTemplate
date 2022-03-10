@@ -15,13 +15,17 @@ class User(Base):
     pending_actions = relationship("PendingAction")
 
     def mention_name(self):
-        return '@' + self.login if self.login else self.name
+        return f'@{self.login}' if self.login else self.name
 
     def _maybe_find_pending_action(self, chat_id: int) -> PendingAction:
-        for pending_action in self.pending_actions:
-            if pending_action.chat_id == chat_id:
-                return pending_action
-        return None
+        return next(
+            (
+                pending_action
+                for pending_action in self.pending_actions
+                if pending_action.chat_id == chat_id
+            ),
+            None,
+        )
 
     def _update_existing_action(self, pending_action: PendingAction, action_string: str) -> bool:
         if not action_string:
@@ -34,8 +38,7 @@ class User(Base):
 
     # Returns previous pending action string (if any).
     def reset_pending_action(self, action_string: str, chat_id: int) -> str:
-        existing_action = self._maybe_find_pending_action(chat_id)
-        if existing_action:
+        if existing_action := self._maybe_find_pending_action(chat_id):
             previous_action_string = existing_action.action
             if self._update_existing_action(existing_action, action_string):
                 return previous_action_string
